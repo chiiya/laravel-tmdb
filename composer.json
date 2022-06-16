@@ -1,0 +1,53 @@
+{
+    "name": "chiiya/laravel-tmdb",
+    "description": "Laravel SDK for the TMDB API",
+    "keywords": [
+        "chiiya",
+        "laravel",
+        "tmdb",
+        "movies",
+        "tv"
+    ],
+    "homepage": "https://github.com/chiiya/laravel-tmdb",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Elisha Witte",
+            "email": "github@chiiya.moe",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "chiiya/tmdb-php": "^0.1",
+        "illuminate/contracts": "^9.0",
+        "spatie/laravel-package-tools": "^1.11"
+    },
+    "require-dev": {
+        "chiiya/laravel-code-style": "^1.7",
+        "nunomaduro/collision": "^6.1",
+        "orchestra/testbench": "^7.1",
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Chiiya\\LaravelTmdb\\": "src"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "phpro/grumphp": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Chiiya\\LaravelTmdb\\LaravelTmdbServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
