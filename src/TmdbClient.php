@@ -32,6 +32,8 @@ class TmdbClient implements ClientInterface
         return Http::withHeaders([
             'Accept' => 'application/json',
             'Content-type' => 'application/json',
-        ])->withToken(config('tmdb.token'));
+        ])
+            ->baseUrl('https://api.themoviedb.org/3/')
+            ->withToken(config('tmdb.token'));
     }
 }
