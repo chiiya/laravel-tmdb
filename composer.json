@@ -19,7 +19,7 @@
     ],
     "require": {
         "php": "^8.1",
-        "chiiya/tmdb-php": "^0.1",
+        "chiiya/tmdb-php": "^0.2",
         "illuminate/contracts": "^9.0",
         "spatie/laravel-package-tools": "^1.11"
     },
