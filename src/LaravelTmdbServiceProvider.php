@@ -17,6 +17,7 @@ class LaravelTmdbServiceProvider extends PackageServiceProvider
 
     public function packageRegistered(): void
     {
+        $this->app->singleton(TmdbClient::class, fn () => new TmdbClient);
         $this->app->bind(ClientInterface::class, TmdbClient::class);
     }
 }

@@ -4,35 +4,69 @@ namespace Chiiya\LaravelTmdb;
 
 use Chiiya\Tmdb\Http\ClientInterface;
 use Illuminate\Http\Client\PendingRequest;
+use Illuminate\Http\Client\RequestException;
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 use JsonSerializable;
 
 class TmdbClient implements ClientInterface
 {
-    public function get(string $url, array $parameters = []): array
-    {
-        return $this->getClient()->get($url, $parameters)->json();
-    }
+    protected PendingRequest $client;
 
-    public function post(string $url, JsonSerializable $data): array
+    public function __construct()
     {
-        return $this->getClient()->post($url, $data->jsonSerialize())->json();
-    }
-
-    public function put(string $url, JsonSerializable $data): array
-    {
-        return $this->getClient()->put($url, $data->jsonSerialize())->json();
+        $this->client = $this->createClient();
     }
 
     /**
-     * Get the configured base client.
+     * Perform a GET request.
+     *
+     * @throws RequestException
      */
-    protected function getClient(): PendingRequest
+    public function get(string $url, array $parameters = []): array
     {
-        return Http::withHeaders([
-            'Accept' => 'application/json',
-            'Content-type' => 'application/json',
-        ])
+        return $this->evaluate($this->client->get($url, $parameters));
+    }
+
+    /**
+     * Perform a POST request.
+     *
+     * @throws RequestException
+     */
+    public function post(string $url, JsonSerializable $data): array
+    {
+        return $this->evaluate($this->client->post($url, $data->jsonSerialize()));
+    }
+
+    /**
+     * Perform a PUT request.
+     *
+     * @throws RequestException
+     */
+    public function put(string $url, JsonSerializable $data): array
+    {
+        return $this->evaluate($this->client->put($url, $data->jsonSerialize()));
+    }
+
+    /**
+     * Check for errors and return JSON decoded response.
+     *
+     * @throws RequestException
+     */
+    protected function evaluate(Response $response): array
+    {
+        $response->throw();
+
+        return $response->json();
+    }
+
+    /**
+     * Get the pre-configured base client.
+     */
+    protected function createClient(): PendingRequest
+    {
+        return Http::acceptJson()
+            ->retry(2)
             ->baseUrl('https://api.themoviedb.org/3/')
             ->withToken(config('tmdb.token'));
     }
