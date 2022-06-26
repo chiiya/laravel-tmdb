@@ -3,6 +3,7 @@
 namespace Chiiya\LaravelTmdb;
 
 use Chiiya\Tmdb\Http\ClientInterface;
+use Chiiya\Tmdb\Query\QueryParameterInterface;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Http\Client\Response;
@@ -25,7 +26,7 @@ class TmdbClient implements ClientInterface
      */
     public function get(string $url, array $parameters = []): array
     {
-        return $this->evaluate($this->client->get($url, $parameters));
+        return $this->evaluate($this->client->get($url, $this->resolveParameters($parameters)));
     }
 
     /**
@@ -69,5 +70,20 @@ class TmdbClient implements ClientInterface
             ->retry(2)
             ->baseUrl('https://api.themoviedb.org/3/')
             ->withToken(config('tmdb.token'));
+    }
+
+    /**
+     * Resolve query parameters implementing QueryParameterInterface.
+     */
+    protected function resolveParameters(array $parameters): array
+    {
+        foreach ($parameters as $key => $filter) {
+            if ($filter instanceof QueryParameterInterface) {
+                unset($parameters[$key]);
+                $parameters[$filter->getKey()] = $filter->getValue();
+            }
+        }
+
+        return $parameters;
     }
 }
