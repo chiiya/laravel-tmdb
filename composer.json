@@ -29,9 +29,6 @@
         "orchestra/testbench": "^10.6",
         "phpunit/phpunit": "^12.3"
     },
-    "conflict": {
-        "squizlabs/php_codesniffer": ">=4.0"
-    },
     "autoload": {
         "psr-4": {
             "Chiiya\\LaravelTmdb\\": "src"
