@@ -1,14 +1,29 @@
-# Laravel TMDB
+![TMDB PHP](./.github/laravel-tmdb.png)
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/chiiya/laravel-tmdb.svg?style=flat-square)](https://packagist.org/packages/chiiya/laravel-tmdb)
-[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/chiiya/laravel-tmdb/lint?label=code%20style)](https://github.com/chiiya/laravel-tmdb/actions?query=workflow%3Alint+branch%3Amaster)
-[![Total Downloads](https://img.shields.io/packagist/dt/chiiya/laravel-tmdb.svg?style=flat-square)](https://packagist.org/packages/chiiya/laravel-tmdb)
+<p align="center">
+    <a href="https://packagist.org/packages/chiiya/laravel-tmdb" target="_blank"><img src="https://img.shields.io/packagist/v/chiiya/laravel-tmdb.svg?style=flat-square"></a>
+    <a href="https://github.com/chiiya/laravel-tmdb/actions?query=workflow%3Alint+branch%3Amaster" target="_blank"><img src="https://img.shields.io/github/actions/workflow/status/chiiya/laravel-tmdb/lint.yml?branch=master"></a>
+    <a href="[#quality-assurance](https://packagist.org/packages/chiiya/laravel-tmdb)" target="_blank"><img src="https://img.shields.io/packagist/dt/chiiya/laravel-tmdb.svg?style=flat-square"></a>
+</p>
 
-Laravel package for using the TMDB API.
+A strongly-typed PHP SDK for the TMDB (The Movie Database) API, providing complete coverage of all
+non-user related APIv3 endpoints with full type safety and IDE autocompletion support.
+
+Uses the Laravel HTTP client for making requests, allowing for easy fake responses in tests.
+
+## Index
+
+<pre>
+<a href="#installation">> Installation</a>
+<a href="#quick-start">> Quickstart</a>
+<a href="#changelog">> Changelog</a>
+<a href="#contributing">> Contributing</a>
+<a href="#license">> License</a>
+</pre>
 
 ## Installation
 
-You can install the package via composer:
+Install the package via Composer:
 
 ```bash
 composer require chiiya/laravel-tmdb
@@ -21,10 +36,7 @@ API Read Access Token (v4 auth):
 TMDB_API_TOKEN="eyJh..."
 ```
 
-## Usage
-
-This package is a thin wrapper around [chiiya/tmdb-php](https://github.com/chiiya/tmdb-php), that allows you to directly
-inject the repositories in your application:
+## Quick Start
 
 ```php
 use Chiiya\Tmdb\Repositories\MovieRepository;
@@ -49,14 +61,6 @@ class TmdbService {
     }
 }
 ```
-
-For documentation on method signatures, check out [chiiya/tmdb-php](https://github.com/chiiya/tmdb-php).
-
-## Testing
-
-Since this package uses the Laravel HTTP Client under the hood to perform API requests,
-you may simply call `Http::fake()` to fake responses in your tests. For mocking specific responses,
-check out the [example responses](https://github.com/chiiya/tmdb-php/tree/master/tests/responses).
 
 ## Changelog
 
