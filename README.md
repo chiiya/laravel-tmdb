@@ -62,6 +62,8 @@ class TmdbService {
 }
 ```
 
+See [`tmdb-php`](https://github.com/chiiya/tmdb-php) for more examples and documentation.
+
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
